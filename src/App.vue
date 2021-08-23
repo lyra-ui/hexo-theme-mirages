@@ -1,5 +1,5 @@
 <template>
-  <div id="app-container" class="relative w-full">
+  <div id="app-container" class="relative w-full overflow-x-hidden">
     <MainHeader />
   </div>
   <Footer />
@@ -151,6 +151,7 @@ export default defineComponent({
 
 <style lang="scss">
 #app-container {
-  background: var(--backgroud-nomal);
+  background: var(--background-nomal);
+  color: var(--text-color);
 }
 </style>

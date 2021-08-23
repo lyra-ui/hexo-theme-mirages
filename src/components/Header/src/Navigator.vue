@@ -13,14 +13,13 @@
 
 <script lang="ts">
 import { useAppStore } from '@/store/app'
-import { isExternal } from '@/utils'
+import useMixin from '@/utils/mixin'
 import { computed, defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup() {
     const appStore = useAppStore()
-    const router = useRouter()
+    const { pushPage } = useMixin()
     const defaultRoutes = [
       {
         name: 'Category',
@@ -35,15 +34,7 @@ export default defineComponent({
         path: '/about'
       }
     ]
-    const pushPage = (path: string) => {
-      if (isExternal(path)) {
-        window.open(path)
-      } else {
-        router.push({
-          path: path
-        })
-      }
-    }
+
     return {
       routes: computed(() => {
         return defaultRoutes.concat(appStore.themeConfig.custom_menus.menus)

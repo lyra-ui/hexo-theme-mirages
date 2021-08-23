@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 
 @import './components/theme.scss';
+@import './components/animation.scss';
 
 #app {
   @apply flex flex-col justify-center items-center min-h-screen;

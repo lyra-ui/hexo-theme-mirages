@@ -1,5 +1,10 @@
 <template>
-  <a :href="href" v-if="text" class="lyra-link relative cursor-pointer no-underline" :style="customStyle">
+  <a
+    :href="href"
+    v-if="text"
+    class="lyra-link relative cursor-pointer no-underline"
+    :style="customStyle"
+  >
     {{ text }}
   </a>
 </template>

@@ -105,7 +105,12 @@ export class Socials implements EmptyCheckable {
   }
 
   isEmpty(): boolean {
-    return this.github.length === 0 && this.twitter.length === 0 && this.weibo.length === 0 && this.customs.isEmpty()
+    return (
+      this.github.length === 0 &&
+      this.twitter.length === 0 &&
+      this.weibo.length === 0 &&
+      this.customs.isEmpty()
+    )
   }
 }
 

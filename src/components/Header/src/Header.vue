@@ -2,15 +2,14 @@
   <div
     class="
       lr-navigator
-      w-full
-      pr-3
-      pl-3
-      pt-4
-      pb-4
+      pt-3
+      pb-3
+      pr-4
+      pl-4
       fixed
-      left-0
+      -left-2
       top-0
-      right-0
+      -right-2
       z-40
       sm:hidden
       mb:block
@@ -40,7 +39,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useAppStore } from '@/store/app'
 import Logo from './Logo.vue'
 import Navigator from './Navigator.vue'
 import ToolBar from './ToolBar.vue'
@@ -50,17 +48,14 @@ export default defineComponent({
     Logo,
     Navigator,
     ToolBar
-  },
-  setup() {
-    const appStore = useAppStore()
-    return {}
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .lr-navigator {
-  background: var(--backgroud-comp-head);
+  backdrop-filter: blur(20px);
+  background: var(--background-main-head);
   color: var(--text-normal);
   box-shadow: 0 0.3125rem 0.3125rem -0.3125rem rgb(0 0 0 / 12%);
 }

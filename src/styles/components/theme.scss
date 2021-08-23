@@ -1,23 +1,29 @@
 .theme-light {
-  --text-normal: rgba(0, 0, 0, 0.9);
-  --text-highlight: #000;
-  --text-main: #333;
-  --text-footer: #333;
+  --text-logo: #000;
 
-  --backgroud-nomal: #ffffff;
-  --backgroud-comp-head: rgba(255, 255, 255, 0.7);
-  --backgroud-button: #333;
-  --backgroud-footer: #fafafa;
+  --text-normal: rgba(0, 0, 0, 0.9);
+  --background-nomal: #ffffff;
+
+  --background-main-head: rgba(255, 255, 255, 0.7);
+
+  --text-footer: #333;
+  --background-footer: #fafafa;
+
+  --text-tool-bar: #333;
+  --background-tool-bar: #f0f0f0;
 }
 
 .theme-dark {
-  --text-normal: rgba(255, 255, 255, 0.9);
-  --text-highlight: #fff;
-  --text-main: #333;
-  --text-footer: #f0f0f0;
+  --text-logo: #fff;
 
-  --backgroud-nomal: #2c2a2a;
-  --backgroud-comp-head: rgba(29, 28, 28, 0.7);
-  --backgroud-button: #333;
-  --backgroud-footer: #2c2a2a;
+  --text-normal: rgba(255, 255, 255, 0.9);
+  --background-nomal: #2c2a2a;
+
+  --background-main-head: rgba(52, 50, 50, 0.7);
+
+  --text-footer: #f0f0f0;
+  --background-footer: #2c2a2a;
+
+  --text-tool-bar: #ccc;
+  --background-tool-bar: #2c2a2a;
 }

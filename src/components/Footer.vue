@@ -55,6 +55,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 #lr-footer {
   color: var(--text-footer);
-  background: var(--backgroud-footer);
+  background: var(--background-footer);
 }
 </style>

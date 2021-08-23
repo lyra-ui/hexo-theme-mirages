@@ -1,7 +1,13 @@
 import request from './request'
 import { Page } from '@/models/Article.class'
 import { HexoConfig } from '@/models/HexoConfig.class'
-import { Categories, Post, PostList, SpecificPostsList, Tags } from '@/models/Article.class'
+import {
+  Categories,
+  Post,
+  PostList,
+  SpecificPostsList,
+  Tags
+} from '@/models/Article.class'
 import { AxiosResponse } from 'axios'
 
 type Response = Promise<AxiosResponse<any>>
@@ -14,7 +20,9 @@ export async function fetchPostsList(currentPage: number): Response {
   return request.get<PostList>(`/posts/${currentPage}.json`)
 }
 
-export async function fetchPostBySlug(slug: string): Promise<AxiosResponse<any>> {
+export async function fetchPostBySlug(
+  slug: string
+): Promise<AxiosResponse<any>> {
   return request.get<Post>(`/articles/${slug}.json`)
 }
 

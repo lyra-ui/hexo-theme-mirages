@@ -15,17 +15,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
     path: '/categories',
     name: 'Categories',
-    component: () => import(/* webpackChunkName: "categories" */ '../views/Category.vue')
+    component: () =>
+      import(/* webpackChunkName: "categories" */ '../views/Category.vue')
   },
   {
     path: '/archives',
     name: 'Archives',
-    component: () => import(/* webpackChunkName: "archives" */ '../views/Archives.vue')
+    component: () =>
+      import(/* webpackChunkName: "archives" */ '../views/Archives.vue')
   },
   {
     path: '/tags',
