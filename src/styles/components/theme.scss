@@ -1,0 +1,21 @@
+.theme-light {
+  --text-normal: rgba(0, 0, 0, 0.9);
+  --text-highlight: #000;
+  --text-main: #333;
+
+  --backgroud-nomal: #ffffff;
+  --backgroud-comp-head: rgba(255, 255, 255, 0.7);
+  --backgroud-button: #333;
+  --backgroud-footer: #fafafa;
+}
+
+.theme-dark {
+  --text-normal: rgba(255, 255, 255, 0.9);
+  --text-highlight: #fff;
+  --text-main: #333;
+
+  --backgroud-nomal: #2c2a2a;
+  --backgroud-comp-head: rgba(29, 28, 28, 0.7);
+  --backgroud-button: #333;
+  --backgroud-footer: #2c2a2a;
+}

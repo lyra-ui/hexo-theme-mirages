@@ -1,0 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+#app {
+  @apply flex flex-col justify-center items-center min-h-screen;
+  #app-container {
+    @apply flex-grow;
+  }
+}
+
+// Reset border style from tailwindcss
+*, *::before, *::after {
+  border: none;
+}
