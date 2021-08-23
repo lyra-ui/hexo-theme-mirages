@@ -1,0 +1,14 @@
+.trans-300-ease-all {
+  transition: 300ms ease all;
+}
+
+.trans-500-ease-all {
+  transition: 300ms ease all;
+}
+
+.rotate {
+  @extend .trans-300-ease-all;
+  &:hover {
+    transform: rotate(-45deg);
+  }
+}

@@ -1,5 +1,8 @@
 <template>
-  <footer id="lr-footer" class="pt-2 pb-2 text-center">
+  <footer
+    id="lr-footer"
+    class="w-full flex justify-center items-center pt-2 pb-2 text-center"
+  >
     <div class="flex text-xs font-normal">
       <div v-if="customFooter"></div>
       <p class="leading-normal">
@@ -49,3 +52,9 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+#lr-footer {
+  color: var(--text-footer);
+  background: var(--backgroud-footer);
+}
+</style>

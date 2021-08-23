@@ -34,3 +34,10 @@ export const randomValue = (data: Array<any>): any => {
   const index = Math.floor(Math.random() * data.length)
   return index > data.length ? data[0] : data[index]
 }
+
+/**
+ * Validate methods
+ */
+export function isExternal(path: string): boolean {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
