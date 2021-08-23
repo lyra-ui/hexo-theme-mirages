@@ -11,7 +11,7 @@
       top-0
       -right-2
       z-40
-      sm:hidden
+      hidden
       mb:block
     "
   >
@@ -22,7 +22,7 @@
         items-center
         w-full
         m-auto
-        md:max-w-2xl
+        md:max-w-3xl
         lg:max-w-4xl
         xl:max-w-5xl
         2xl:max-w-6xl

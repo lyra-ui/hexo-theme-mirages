@@ -1,6 +1,12 @@
 <template>
   <div id="app-container" class="relative w-full overflow-x-hidden">
     <MainHeader />
+    <div id="loading-bar-wrapper"></div>
+    <router-view v-slot="{ Component }">
+      <transition name="fade-slide-y" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
   <Footer />
 </template>
