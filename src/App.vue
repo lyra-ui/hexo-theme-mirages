@@ -17,7 +17,7 @@
 import { computed, defineComponent, onBeforeMount, ref, watch } from 'vue'
 import { useAppStore } from './store/app'
 import { useCommonStore } from '@/store/common'
-import { getCookie, setCookie } from './utils'
+import { changeFavicon, getCookie, setCookie } from './utils'
 import { MainHeader } from '@/components/Header'
 import Footer from '@/components/Footer.vue'
 import { useSpecificlistStore } from './store/specificlist'
@@ -88,17 +88,7 @@ export default defineComponent({
       await appStore.fecthConfig().then(() => {
         // Change favicon dynamically.
         const favicon = appStore.themeConfig.site.favicon
-        if (favicon && favicon !== '') {
-          const link = document.querySelector("link[rel~='icon']")
-          if (link) {
-            link.setAttribute('herf', appStore.themeConfig.site.favicon)
-          } else {
-            const node = document.createElement('link')
-            node.rel = 'icon'
-            node.href = appStore.themeConfig.site.favicon
-            document.querySelector('head')?.appendChild(node)
-          }
-        }
+        favicon && favicon !== '' && changeFavicon(favicon)
         comptuedAnnouncement()
       })
       await specificlistStore.fetchCategories()
