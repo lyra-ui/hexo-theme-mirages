@@ -80,8 +80,14 @@ export class PostList {
     }
   }
 }
+export interface GridItem {
+  name: string
+  slug: string
+  path: string
+  count: number
+}
 
-export class Category {
+export class Category implements GridItem {
   name = ''
   slug = ''
   path = ''
@@ -118,7 +124,7 @@ export class Categories {
   }
 }
 
-export class Tag {
+export class Tag implements GridItem {
   name = ''
   slug = ''
   path = ''

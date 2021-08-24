@@ -1,42 +1,91 @@
 <template>
   <div class="w-full">
     <PageCover :data="cover" />
+    <div class="relative w-full">
+      <div
+        class="
+          w-full
+          m-auto
+          overflow-hidden
+          md:max-w-2xl
+          lg:max-w-4xl
+          xl:max-w-5xl
+          2xl:max-w-6xl
+        "
+      >
+        <GridList
+          title="全部类别"
+          :items="gridlist"
+          :currentItem="currentCategory"
+          @itemClick="changeCategory"
+        />
+        <ArticleCard
+          v-for="post in postlist"
+          :key="post.name"
+          :post="post"
+          @postClick="pushPage(`/post/${post.slug}`)"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import PageCover from '@/components/PageCover.vue'
+import GridList from '@/components/GridList.vue'
+import ArticleCard from '@/components/ArticleCard.vue'
 import { useSpecificlistStore } from '@/store/specificlist'
-import { useRoute } from 'vue-router'
-import { PostList } from '@/models/Article.class'
+import { GridItem, PostList } from '@/models/Article.class'
 import { randomValue } from '@/utils'
 import { useAppStore } from '@/store/app'
 export default defineComponent({
   components: {
-    PageCover
+    PageCover,
+    GridList,
+    ArticleCard
   },
   setup() {
     const appStore = useAppStore()
     const specificlistStore = useSpecificlistStore()
-    const route = useRoute()
     const postlist = ref(new PostList().posts)
+    const currentCategory = ref('未分类')
+    let slug =
+      specificlistStore.categories.length > 1
+        ? specificlistStore.categories[0].slug
+        : null
+    const fetchAllCategories = async () => {
+      await specificlistStore.fetchCategories().then(async () => {
+        if (specificlistStore.categories.length > 0) {
+          const slug = specificlistStore.categories[0].slug
+          await fetchPostsList(slug)
+        }
+      })
+    }
 
-    let slug = String(route.params.slug)
-    const fetchPostsList = async () => {
+    const changeCategory = async (item: GridItem) => {
+      currentCategory.value = item.name
+      await specificlistStore.fecthCategory(item.slug).then(() => {
+        postlist.value = specificlistStore.specificlist.postlist
+      })
+    }
+    const fetchPostsList = async (slug: string) => {
       await specificlistStore.fecthCategory(slug).then(() => {
         postlist.value = specificlistStore.specificlist.postlist
       })
     }
-    onMounted(fetchPostsList)
+    onMounted(fetchAllCategories)
     return {
       postlist,
+      gridlist: computed(() => specificlistStore.categories),
       cover: computed(() => {
         return {
           background: randomValue(appStore.themeConfig.pictures),
           title: slug
         }
-      })
+      }),
+      currentCategory,
+      changeCategory
     }
   }
 })

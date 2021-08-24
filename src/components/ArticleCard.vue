@@ -61,7 +61,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ['cardClick']
+  emits: ['postClick']
 })
 </script>
 

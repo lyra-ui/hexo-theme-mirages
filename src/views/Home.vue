@@ -17,6 +17,7 @@
           v-for="post in postlist.posts"
           :key="post.name"
           :post="post"
+          @postClick="pushPage(`/post/${post.slug}`)"
         />
         <Paginator
           :totalPage="pagination.totalPage"

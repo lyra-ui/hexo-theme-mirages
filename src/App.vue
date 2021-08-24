@@ -4,9 +4,7 @@
     <div id="loading-bar-wrapper"></div>
     <router-view v-slot="{ Component }">
       <transition name="fade-slide-y" mode="out-in">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
+        <component :is="Component" />
       </transition>
     </router-view>
   </div>
@@ -91,7 +89,7 @@ export default defineComponent({
         favicon && favicon !== '' && changeFavicon(favicon)
         comptuedAnnouncement()
       })
-      await specificlistStore.fetchCategories()
+      // await specificlistStore.fetchCategories()
       await specificlistStore.fetchAllTags()
     }
 
