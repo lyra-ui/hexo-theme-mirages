@@ -1,15 +1,60 @@
-import { useAppStore } from '@/store/app'
-import router from './router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Home from '../views/Home.vue'
 
-router.beforeEach(async (from, to, next) => {
-  const appStore = useAppStore()
-  appStore.startLoading()
-  next()
-})
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "404" */ '../views/404.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/category/:slug',
+    name: 'Category',
+    component: () =>
+      import(/* webpackChunkName: "categories" */ '../views/Category.vue')
+  },
+  {
+    path: '/archives',
+    name: 'Archives',
+    component: () =>
+      import(/* webpackChunkName: "archives" */ '../views/Archives.vue')
+  },
+  {
+    path: '/tags',
+    name: 'Tags',
+    component: () => import(/* webpackChunkName: "tags" */ '../views/Tag.vue')
+  },
+  {
+    path: '/post/:slug*',
+    name: 'Post',
+    component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue')
+  },
+  {
+    path: '/page/:slug*',
+    name: 'Page',
+    component: () => import(/* webpackChunkName: "page" */ '../views/Page.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/404'
+    // hidden: true
+  }
+]
 
-router.afterEach(async () => {
-  const appStore = useAppStore()
-  appStore.endLoading()
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 })
 
 export default router

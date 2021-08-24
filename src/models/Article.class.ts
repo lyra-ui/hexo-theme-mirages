@@ -60,9 +60,9 @@ export class Post {
 
 export class PostList {
   posts: Post[] = []
-  total_page = 0
+  total_pages = 0
   page_size = 0
-  total = 0
+  current = 0
 
   constructor(raw?: { [ket: string]: [] }) {
     if (raw) {

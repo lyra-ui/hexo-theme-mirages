@@ -1,10 +1,12 @@
 <template>
-  <div id="app-container" class="relative w-full overflow-x-hidden">
+  <div id="app-container" class="relative w-full overflow-hidden">
     <MainHeader />
     <div id="loading-bar-wrapper"></div>
     <router-view v-slot="{ Component }">
       <transition name="fade-slide-y" mode="out-in">
-        <component :is="Component" />
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
       </transition>
     </router-view>
   </div>
@@ -18,6 +20,7 @@ import { useCommonStore } from '@/store/common'
 import { getCookie, setCookie } from './utils'
 import { MainHeader } from '@/components/Header'
 import Footer from '@/components/Footer.vue'
+import { useSpecificlistStore } from './store/specificlist'
 export default defineComponent({
   components: {
     MainHeader,
@@ -26,6 +29,7 @@ export default defineComponent({
   setup() {
     const appStore = useAppStore()
     const commonStore = useCommonStore()
+    const specificlistStore = useSpecificlistStore()
     const MOBILE_WITH = 996
     const FOOTER_MIN_WITH = 396
 
@@ -97,6 +101,8 @@ export default defineComponent({
         }
         comptuedAnnouncement()
       })
+      await specificlistStore.fetchCategories()
+      await specificlistStore.fetchAllTags()
     }
 
     onBeforeMount(initialApp)

@@ -5,14 +5,118 @@
 @import './components/theme.scss';
 @import './components/animation.scss';
 
+body * {
+  &::selection {
+    background: #1abc9c !important;
+    color: #fff;
+    text-shadow: none;
+  }
+  font-family: 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',
+    'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif;
+}
+
+body::-webkit-scrollbar,
+body *::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background-color: var(--background-nomal);
+}
+
+body::-webkit-scrollbar-thumb,
+body *::-webkit-scrollbar-thumb {
+  box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
+  background-clip: padding-box;
+  background-color: #808080;
+  min-height: 40px;
+  padding-top: 100px;
+  border-radius: 4px;
+  &:hover {
+    background-color: #b9b9b9;
+  }
+}
+
 #app {
   @apply flex flex-col justify-center items-center min-h-screen;
   #app-container {
     @apply flex-grow;
   }
 }
+/** nprogress styles */
+#loading-bar-wrapper #nprogress {
+  pointer-events: none;
+  .bar {
+    background: var(--main-gradient);
+    position: absolute;
+    z-index: 3000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+  }
+  .peg {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 8px;
+    opacity: 0;
+    box-shadow: none;
+    transform: rotate(3deg) translate(0, -4px);
+  }
+  .spinner {
+    display: block;
+    position: fixed;
+    z-index: 3000;
+    top: 15px;
+    right: 15px;
+  }
+  .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-top-color: var(--text-accent);
+    border-left-color: var(--text-accent);
+    border-radius: 50%;
+    -webkit-animation: nprogress-spinner 0.4s linear infinite;
+    animation: nprogress-spinner 0.4s linear infinite;
+  }
+}
 
-// Reset border style from tailwindcss
-*, *::before, *::after {
+@keyframes nprogress-spinner {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-bar-wrapper {
+  position: fixed;
+  width: 100vw;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  // border-radius: 8px;
+  z-index: 2000;
+  background: transparent;
+  overflow: hidden;
+  &.nprogress-custom-parent {
+    background: transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Reset style from tailwindcss */
+*,
+*::before,
+*::after {
   border: none;
 }

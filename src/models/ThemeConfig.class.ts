@@ -21,6 +21,8 @@ export class Site {
   announcement = ''
   logo = ''
   favicon = ''
+  background = ''
+  cover_percentage = 47
   beian = {
     text: '',
     link: ''
@@ -40,6 +42,14 @@ export class Site {
           Object.assign(this, { [key]: raw[key] })
         }
       }
+    }
+  }
+
+  pageCover(): any {
+    return {
+      subtitle: this.subtitle,
+      description: this.description,
+      background: this.background
     }
   }
 }
@@ -303,7 +313,6 @@ export class ThemeConfig {
       this.site = new Site(rawConfig.site)
       this.author = new Author(rawConfig.author)
       this.custom_menus = new CustomMenus(rawConfig.custom_menus)
-      console.log(this.custom_menus)
       this.socials = new Socials(rawConfig.socials)
       this.theme_preset = new ThemePreset(rawConfig.theme_preset)
       this.qrcode = new QRCode(rawConfig.qr_code)

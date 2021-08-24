@@ -1,6 +1,7 @@
 <template>
   <div
     class="
+      select-none
       lr-navigator
       pt-3
       pb-3
@@ -12,7 +13,7 @@
       -right-2
       z-40
       hidden
-      mb:block
+      md:block
     "
   >
     <div
@@ -22,7 +23,7 @@
         items-center
         w-full
         m-auto
-        md:max-w-3xl
+        md:max-w-2xl
         lg:max-w-4xl
         xl:max-w-5xl
         2xl:max-w-6xl

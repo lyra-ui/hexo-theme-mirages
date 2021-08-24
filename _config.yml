@@ -1,0 +1,141 @@
+site:
+  title: Lyra's Blog
+  # Text on the backgroud of homepage, line 1.
+  subtitle: Nice to meet you
+  # Text on the backgroud of homepage, line 2.
+  description: 有生之年，欣喜相逢。
+  # Site‘s
+  announcement: Lyra is a constellation, also called Lyrids.
+  # The url of logo picture, or site name (less than 16 characters is better)
+  logo:
+  # Site’s favicon
+  favicon:
+  # Homepage‘s background
+  background:
+  # Percentage of the image on each page
+  # Value between 30 to 70
+  cover_percentage: 47.5
+  # China server beian info
+  beian:
+    text: ''
+    link: ''
+  # China server police beian info
+  police_beian:
+    text: ''
+    link: ''
+
+# The posts' title of top.
+pins:
+  key: 'title'
+  data:
+    # Example
+    # - Hello World
+
+# The main author, you can set custom author in posts.
+author:
+  name: Lyra
+  avator: ''
+  link: ''
+  description: ''
+
+# If no image is set as the `site backgroud`, `post cover`, `post background`, etc.
+# Theme will choose one of image in pictures randomly,
+# And set it as the corresponding picture.
+pictures:
+  [
+    https://images.unsplash.com/photo-1628611225255-0c20f60f4316,
+    https://images.unsplash.com/photo-1511044568932-338cba0ad803,
+    https://images.unsplash.com/photo-1561037404-61cd46aa615b
+  ]
+
+# Custom site footer, HTML available
+footer:
+
+# Needs set some configs at _config.yml
+# See https://github.com/hexojs/hexo-generator-feed
+rss:
+  enable: false
+  path: '/'
+#
+custom_menu:
+  # [
+  #   {
+  #     name: Lyra,
+  #     path: /
+  #   }
+  # ]
+  # Example
+  # Lyra:
+  #   name: Lyra
+  #   path: ''
+
+#! ---------------------------------------------------------------
+#! Socials Config
+#! @docs
+#! ---------------------------------------------------------------
+socials:
+  github: ''
+  twitter: ''
+  weibo: ''
+  customs:
+    # Example
+    # facebook:
+    #   icon: ''
+    #   link: ''
+
+theme_preset:
+  main_color: '#1abc9c'
+  main_dark_color: ''
+  navigator: 'top' # top or side, empty will be reset to `top`
+
+qrcode:
+  current_page: ''
+  pay: ''
+
+# For local development only!
+gitalk:
+  enable: true
+  autoExpand: true
+  clientID: ''
+  clientSecret: ''
+  repo: 'dev-blog-comments'
+  owner: 'TriDiamond'
+  admin: ['TriDiamond']
+  id: uid
+  language: en
+  distractionFreeMode: true
+  recentComment: true
+  proxy: ''
+
+# Valine comment plugin (recommended!)
+# see https://valine.js.org/quickstart.html
+valine:
+  enable: false
+  app_id:
+  app_key:
+  avatar: ''
+  placeholder: Leave your thoughts behind~
+  visitor: true
+  lang: en
+  avatarForce: false
+  meta: ['nick', 'mail']
+  requiredFields: []
+  admin: 'TriDiamond'
+  recentComment: true
+
+busuanzi:
+  enable: true
+
+#
+copy_protection:
+  enable: false
+  author:
+    cn: 作者
+    en: Author
+  link:
+    cn:
+
+injects:
+  scripts:
+  css:
+  meta:

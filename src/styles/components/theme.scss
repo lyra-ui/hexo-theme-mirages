@@ -1,3 +1,6 @@
+:root {
+  --text-accent: #e93796;
+}
 .theme-light {
   --text-logo: #000;
 
@@ -11,6 +14,10 @@
 
   --text-tool-bar: #333;
   --background-tool-bar: #f0f0f0;
+
+  --text-button: #333;
+
+  --main-gradient: linear-gradient(25deg, #3bb0da, #92b0a8, #bbb175, #d7b23a);
 }
 
 .theme-dark {
@@ -26,4 +33,8 @@
 
   --text-tool-bar: #ccc;
   --background-tool-bar: #2c2a2a;
+
+  --text-button: #fff;
+
+  --main-gradient: linear-gradient(25deg, #060e33, #4e4563, #968397, #e3c8ce);
 }
