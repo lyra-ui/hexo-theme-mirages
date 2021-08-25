@@ -13,11 +13,7 @@
           2xl:max-w-6xl
         "
       >
-        <GridList
-          title="标签云"
-          :items="gridlist"
-          @itemClick="pushTagPage"
-        />
+        <GridList title="标签云" :items="gridlist" @itemClick="pushTagPage" />
         <ArticleCard
           v-for="post in postlist"
           :key="post.name"
