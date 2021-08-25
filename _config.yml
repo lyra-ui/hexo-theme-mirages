@@ -57,17 +57,21 @@ rss:
   enable: false
   path: '/'
 #
-custom_menu:
-  # [
-  #   {
-  #     name: Lyra,
-  #     path: /
-  #   }
-  # ]
-  # Example
-  # Lyra:
-  #   name: Lyra
-  #   path: ''
+menu:
+  category: true,
+  tags: false,
+  archives: true,
+  custom:
+    # [
+    #   {
+    #     name: Lyra,
+    #     path: /
+    #   }
+    # ]
+    # Example
+    # Lyra:
+    #   name: Lyra
+    #   path: ''
 
 #! ---------------------------------------------------------------
 #! Socials Config

@@ -20,7 +20,7 @@ module.exports = function (hexo) {
     apiData = siteConfig.addSiteConfig(apiData)
 
     const category = new CategoryGenerator(site.categories, site.posts, configs)
-    const {data, defaultCat} = category.addCategories(apiData)
+    const { data, defaultCat } = category.addCategories(apiData)
     apiData = data
     const posts = new PostGenerator(site.posts, configs, defaultCat)
     apiData = posts.addPaginationPost(apiData)

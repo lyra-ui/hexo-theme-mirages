@@ -85,11 +85,24 @@ export class CustomMenu {
   }
 }
 
-export class CustomMenus {
-  menus: CustomMenu[] = []
-  constructor(raw?: [StringOptions]) {
+export class Menu {
+  category = true
+  tags = true
+  archives = true
+  customs: CustomMenu[] = []
+  constructor(raw?: GeneralOptions) {
     if (raw) {
-      this.menus = raw.map(item => new CustomMenu(item))
+      for (const key of Object.keys(this)) {
+        if (Object.prototype.hasOwnProperty.call(raw, key)) {
+          if (key === 'custom') {
+            this.customs = raw[key].map(
+              (item: StringOptions) => new CustomMenu(item)
+            )
+          } else {
+            Object.assign(this, { [key]: raw[key] })
+          }
+        }
+      }
     }
   }
 }
@@ -299,7 +312,7 @@ export class Plugins implements PluginsData {
 export class ThemeConfig {
   site = new Site()
   author = new Author()
-  custom_menus = new CustomMenus()
+  menu = new Menu()
   socials = new Socials()
   theme_preset = new ThemePreset()
   qrcode = new QRCode()
@@ -312,7 +325,7 @@ export class ThemeConfig {
     if (rawConfig) {
       this.site = new Site(rawConfig.site)
       this.author = new Author(rawConfig.author)
-      this.custom_menus = new CustomMenus(rawConfig.custom_menus)
+      this.menu = new Menu(rawConfig.custom_menus)
       this.socials = new Socials(rawConfig.socials)
       this.theme_preset = new ThemePreset(rawConfig.theme_preset)
       this.qrcode = new QRCode(rawConfig.qr_code)

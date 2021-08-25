@@ -60,7 +60,7 @@ export default defineComponent({
     const defaultUrl = 'https://ftp.bmp.ovh/imgs/2021/07/68fc9e979e121749.jpg'
     const background: string = toRefs(props).data.value?.background
     const coverHeight = ref({
-      height: window.innerWidth > 768 ? '537px' : '325px'
+      height: window.innerWidth > 768 ? '520px' : '325px'
     })
     watch(
       () => appStore.themeConfig.site.cover_percentage,

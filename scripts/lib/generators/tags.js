@@ -9,8 +9,8 @@ class TagsGenerator {
   tags = []
   posts = []
   configs = {}
-  constructor(categories, posts, configs) {
-    this.tags = categories
+  constructor(tags, posts, configs) {
+    this.tags = tags
     this.posts = posts
     this.configs = configs
     this.transform()
@@ -21,7 +21,7 @@ class TagsGenerator {
     const posts = this.posts
     const configs = this.configs
 
-    this.data = tags.reduce(function (result, item) {
+    this.tags = tags.reduce(function (result, item) {
       if (!item.length) return result
 
       return result.concat(

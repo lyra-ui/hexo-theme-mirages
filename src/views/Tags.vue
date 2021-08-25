@@ -14,9 +14,10 @@
         "
       >
         <GridList
-          title="标签云"
+          title="全部标签"
           :items="gridlist"
-          @itemClick="pushTagPage"
+          :currentItem="currentTag"
+          @itemClick="changeTag"
         />
         <ArticleCard
           v-for="post in postlist"
@@ -30,36 +31,50 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import PageCover from '@/components/PageCover.vue'
 import GridList from '@/components/GridList.vue'
-import { randomValue } from '@/utils'
-import { useAppStore } from '@/store/app'
+import ArticleCard from '@/components/ArticleCard.vue'
 import { useSpecificlistStore } from '@/store/specificlist'
 import { GridItem, PostList } from '@/models/Article.class'
-import useMinin from '@/utils/mixin'
+import { randomValue } from '@/utils'
+import { useAppStore } from '@/store/app'
 
 export default defineComponent({
   components: {
     PageCover,
-    GridList
+    GridList,
+    ArticleCard
   },
   setup() {
     const appStore = useAppStore()
     const specificlistStore = useSpecificlistStore()
+    const currentTag = ref('')
     const postlist = ref(new PostList().posts)
-    const { pushPage } = useMinin()
-    const pushTagPage = (item: GridItem) => {
-      pushPage(`/tag/${item.slug}`)
+    const changeTag = async (item: GridItem) => {
+      currentTag.value = item.name
+      await specificlistStore.fecthTag(item.slug).then(() => {
+        postlist.value = specificlistStore.specificlist.postlist
+      })
     }
+
+    const fetchData = async () => {
+      await specificlistStore.fetchAllTags().then(() => {
+        postlist.value = specificlistStore.specificlist.postlist
+      })
+    }
+
+    onMounted(fetchData)
+
     return {
       cover: {
         background: randomValue(appStore.themeConfig.pictures),
-        title: '归档'
+        title: '标签'
       },
-      postlist,
       gridlist: computed(() => specificlistStore.tags),
-      pushTagPage
+      changeTag,
+      currentTag,
+      postlist
     }
   }
 })

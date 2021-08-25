@@ -49,15 +49,12 @@ export default defineComponent({
     const appStore = useAppStore()
     const specificlistStore = useSpecificlistStore()
     const postlist = ref(new PostList().posts)
-    const currentCategory = ref('未分类')
-    let slug =
-      specificlistStore.categories.length > 1
-        ? specificlistStore.categories[0].slug
-        : null
+    const currentCategory = ref('')
     const fetchAllCategories = async () => {
       await specificlistStore.fetchCategories().then(async () => {
         if (specificlistStore.categories.length > 0) {
           const slug = specificlistStore.categories[0].slug
+          currentCategory.value = specificlistStore.categories[0].name
           await fetchPostsList(slug)
         }
       })
@@ -78,12 +75,10 @@ export default defineComponent({
     return {
       postlist,
       gridlist: computed(() => specificlistStore.categories),
-      cover: computed(() => {
-        return {
-          background: randomValue(appStore.themeConfig.pictures),
-          title: slug
-        }
-      }),
+      cover: {
+        background: randomValue(appStore.themeConfig.pictures),
+        title: '分类'
+      },
       currentCategory,
       changeCategory
     }

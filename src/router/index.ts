@@ -33,7 +33,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/tags',
     name: 'Tags',
-    component: () => import(/* webpackChunkName: "tags" */ '../views/Tag.vue')
+    component: () => import(/* webpackChunkName: "tags" */ '../views/Tags.vue')
+  },
+  {
+    path: '/tag/:slug',
+    name: 'Tag',
+    component: () => import(/* webpackChunkName: "tag" */ '../views/Tag.vue')
   },
   {
     path: '/post/:slug*',
