@@ -7,12 +7,14 @@ class PostGenerator {
   posts = []
   configs = {}
   author = {}
+  defaultCat = {}
 
-  constructor(data, configs) {
+  constructor(data, configs, defaultCat) {
     this.data = data
     this.configs = configs
     this.posts = data.data
     this.author = this.configs.theme_config.author || {}
+    this.defaultCat = defaultCat
     this.transform()
   }
 
@@ -20,36 +22,28 @@ class PostGenerator {
     if (this.count <= 0) return
     let prevPost = {}
     let cacheList = []
-    this.customSort()
-    this.posts.forEach((post, index) => {
-      let current = postMapper(post, this.configs)
+    this.sortByDate()
+    this.data.data.forEach((post, index) => {
+      let current = postMapper(post, this.configs, this.defaultCat)
       current.prev_post = prevPost
       current.next_post = {}
       prevPost = postListMapper(current, this.configs)
-      if (index !== 0 && index !== this.posts.length - 1) {
+      if (index !== 0) {
+        cacheList[index - 1].next_post = postListMapper(current, this.configs)
       }
       cacheList.push(current)
     })
 
-    this.posts = cacheList
+    this.sortByPin(cacheList)
   }
 
-  customSort() {
-    const top = this.configs.theme_config.top || []
-    let topPosts = this.posts
-      .filter(item => top.indexOf(item.title) !== -1 && item.published)
-      .map(item => {
-        item.is_top = true
-        return item
-      })
-    let normalPosts = this.posts
-      .filter(item => top.indexOf(item.title) === -1 && item.published)
-      .map(item => {
-        item.is_top = false
-        return item
-      })
-    // topPosts.sort('-date')
-    // normalPosts.sort('-date')
+  sortByDate() {
+    this.data = this.data.sort('-date').filter(post => post.published)
+  }
+
+  sortByPin(list) {
+    const topPosts = list.filter(item => item.pinned)
+    const normalPosts = list.filter(item => !item.pinned)
     this.posts = topPosts.concat(normalPosts)
   }
 
@@ -65,7 +59,7 @@ class PostGenerator {
     // To keep the list post count event, use 13 instead of 12
     const pageSize = 10
     const pageCount = Math.ceil(length / pageSize)
-    const postData = this.data.map(item => {
+    const postData = this.posts.map(item => {
       return postListMapper(item, this.configs)
     })
 

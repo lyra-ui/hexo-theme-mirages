@@ -87,7 +87,7 @@ class CategoryGenerator {
       const categoryPages = this.categories.map(categoryPageMapper)
       data = data.concat(categoryPages)
     }
-    return data
+    return { data, defaultCat: categoryMapper(this.categories[0]) }
   }
 }
 

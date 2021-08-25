@@ -2,8 +2,10 @@ const { randomValue, generateUid } = require('./utils')
 const truncateHTML = require('./truncate-html')
 const symbolsCountTime = require('./symbols-count-time')
 
-function postMapper(post, configs) {
+function postMapper(post, configs, defaultCat) {
   const pictures = configs.theme_config.pictures
+  const pinKey = configs.theme_config.pins.key
+  const pins = configs.theme_config.pins.data
   return {
     title: post.title,
     uid: post.uid || post.uuid || generateUid('post_uid___' + post.title),
@@ -14,10 +16,10 @@ function postMapper(post, configs) {
     path: 'api/articles/' + post.slug + '.json',
     cover: post.cover || randomValue(pictures),
     content: post.content,
-    pinned: post.pinned || pinnedMapper(post.title, configs),
+    pinned: post.pinned || pinnedMapper(post[pinKey], pins),
     preview: truncateHTML(post.content, post.preview || 140),
     read_duration: symbolsCountTime(post.content),
-    categories: post.categories ? postCategoryMapper(post) : [],
+    categories: post.categories?.length > 0 ? postCategoryMapper(post) : [defaultCat],
     tags: post.tags ? postTagMapper(post) : [],
     // toc: toc(post.content),
     author: authorMapper(post.author, configs),
@@ -49,8 +51,8 @@ function authorMapper(author, configs) {
  return configs.theme_config.author
 }
 
-function pinnedMapper(title, configs) {
-  if (configs.theme_config.pins) return configs.theme_config.pins.indexOf(title) !== -1
+function pinnedMapper(title, pins) {
+  if (pins && title) return pins.indexOf(title) !== -1
   return false
 }
 

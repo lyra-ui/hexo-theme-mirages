@@ -19,15 +19,15 @@ module.exports = function (hexo) {
     const siteConfig = new SiteGenerator(configs)
     apiData = siteConfig.addSiteConfig(apiData)
 
-    const posts = new PostGenerator(site.posts, configs)
+    const category = new CategoryGenerator(site.categories, site.posts, configs)
+    const {data, defaultCat} = category.addCategories(apiData)
+    apiData = data
+    const posts = new PostGenerator(site.posts, configs, defaultCat)
     apiData = posts.addPaginationPost(apiData)
     apiData = posts.addArticles(apiData)
 
     const pages = new PageGenerator(site.pages, configs)
     apiData = pages.addPages(apiData)
-
-    const category = new CategoryGenerator(site.categories, site.posts, configs)
-    apiData= category.addCategories(apiData)
 
     const tags = new TagsGenerator(site.tags, site.posts, configs)
     apiData = tags.addTags(apiData)
