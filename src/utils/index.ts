@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import dayjs from 'dayjs'
 
 const getSystemMode = (): string => {
   // dark-mode media query matched or not
@@ -45,6 +46,10 @@ export const setTheme = (theme: string): void => {
 export const randomValue = (data: Array<any>): any => {
   const index = Math.floor(Math.random() * data.length)
   return index > data.length ? data[0] : data[index]
+}
+
+export const dateFormater = (date: string | Date, to: string): string => {
+  return dayjs(date).format(to)
 }
 
 /**

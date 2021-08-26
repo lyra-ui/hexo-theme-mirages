@@ -43,7 +43,7 @@
           </h2>
           <div class="text-sm">
             <span>{{ post.author.name }}</span>
-            <span>・{{ post.date }}・</span>
+            <span>・{{ dateFormater(post.date, 'YYYY 年 MM 月 DD 日') }}・</span>
             <span>{{ post.category || '未分类' }}</span>
           </div>
         </div>
@@ -53,6 +53,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { dateFormater } from '@/utils/index'
 
 export default defineComponent({
   props: {
@@ -61,7 +62,12 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ['postClick']
+  emits: ['postClick'],
+  setup() {
+    return {
+      dateFormater
+    }
+  }
 })
 </script>
 
