@@ -13,12 +13,18 @@
           2xl:max-w-6xl
         "
       >
+        <!-- <template v-if="postlist.posts.length <= 0">
+          <ArticleCard v-for="i in 3" :key="i" :post="{}" />
+        </template>
+        <template v-else> -->
         <ArticleCard
           v-for="post in postlist.posts"
           :key="post.name"
           :post="post"
           @postClick="pushPage(`/post/${post.slug}`)"
         />
+        <!-- </template> -->
+
         <Paginator
           :totalPage="pagination.totalPage"
           :pageSize="pagination.pageSize"
@@ -58,9 +64,11 @@ export default defineComponent({
     const { pushPage } = useMixin()
     const fectchPosts = async () => {
       await postStore.fetchPostsList().then(() => {
-        postlist.value = postStore.posts
-        pagination.value.totalPage = postStore.posts.total_pages
-        pagination.value.pageSize = postStore.posts.page_size
+        setTimeout(() => {
+          postlist.value = postStore.posts
+          pagination.value.totalPage = postStore.posts.total_pages
+          pagination.value.pageSize = postStore.posts.page_size
+        }, 1000)
       })
     }
     const fetchData = async () => {

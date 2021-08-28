@@ -43,7 +43,9 @@
           </h2>
           <div class="text-sm">
             <span>{{ post.author.name }}</span>
-            <span>・{{ dateFormater(post.date, 'YYYY 年 MM 月 DD 日') }}・</span>
+            <span>
+              ・{{ dateFormater(post.date, 'YYYY 年 MM 月 DD 日') }}・
+            </span>
             <span>{{ post.category || '未分类' }}</span>
           </div>
         </div>

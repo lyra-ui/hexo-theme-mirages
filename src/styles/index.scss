@@ -4,6 +4,9 @@
 
 @import './components/theme.scss';
 @import './components/animation.scss';
+@import './components/prism-light.scss';
+@import './components/prism-dark.scss';
+@import './components/prism-mirages.scss';
 
 body * {
   &::selection {

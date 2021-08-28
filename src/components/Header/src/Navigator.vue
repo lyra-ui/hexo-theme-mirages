@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import useMixin from '@/utils/mixin'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
