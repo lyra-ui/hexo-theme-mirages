@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <PageCover :data="cover" />
+    <PageCover :data="cover" type="about" />
     <div class="relative w-full">
       <div
         class="
@@ -24,7 +24,7 @@ import { Page } from '@/models/Article.class'
 import { useAppStore } from '@/store/app'
 import { usePageStore } from '@/store/page'
 import { randomValue } from '@/utils'
-import { defineComponent, onBeforeMount, ref } from 'vue'
+import { computed, defineComponent, onBeforeMount, ref } from 'vue'
 import PageCover from '@/components/PageCover.vue'
 
 export default defineComponent({
@@ -40,13 +40,29 @@ export default defineComponent({
         pageData.value = res
       })
     }
+    const cover = computed(() => {
+      const background =
+        pageData.value.cover.length > 0
+          ? pageData.value.cover
+          : randomValue(appStore.themeConfig.pictures)
+      const avator =
+        appStore.themeConfig.author.avator.length > 0
+          ? appStore.themeConfig.author.avator
+          : 'https://z3.ax1x.com/2021/08/30/hNY8xS.jpg'
+      const title =
+        appStore.themeConfig.author.name.length > 0
+          ? appStore.themeConfig.author.name
+          : 'About'
+      return {
+        title,
+        background,
+        avator
+      }
+    })
 
     onBeforeMount(fecthData)
     return {
-      cover: {
-        background: randomValue(appStore.themeConfig.pictures),
-        title: 'About'
-      },
+      cover,
       pageData
     }
   }

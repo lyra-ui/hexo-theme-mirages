@@ -40,7 +40,10 @@ export class Post {
   content = ''
   pinned = false
   preview = ''
-  read_duration = {}
+  read_duration = {
+    symbolsCount: 0,
+    symbolsTime: '0s'
+  }
   author = {
     name: ''
   }

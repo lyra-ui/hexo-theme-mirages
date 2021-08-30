@@ -19,7 +19,11 @@
       <div class="page-cover-text">
         <template v-if="type === 'home' || type === 'about'">
           <div v-if="type === 'about'" class="w-36 h-36">
-            <img class="rotate rounded-full" :src="data.avator" alt="" />
+            <img
+              class="rotate rounded-full w-full h-full"
+              :src="data.avator"
+              alt=""
+            />
           </div>
           <h1 class="w-full text-4xl">
             {{ data.subtitle || data.title }}
@@ -32,10 +36,24 @@
           <h1>
             {{ data.title }}
           </h1>
-          <h2>
-            {{ data.author }}・{{ data.date }}・阅读: {{ data.count }}・{{
-              data.category
-            }}
+          <h2 class="text-sm font-normal">
+            <span v-if="data.author">
+              <LyraLink
+                :href="`/author/${data.author.slug}`"
+                :text="data.author.name"
+              />
+            </span>
+            ・
+            <span>{{ dateFormater(data.date, 'YYYY 年 MM 月 DD 日') }}</span>
+            ・
+            <span v-for="item in data.categories" :key="item.name">
+              <LyraLink :href="`/category/${item.slug}`" :text="item.name" />
+            </span>
+          </h2>
+          <h2 class="text-sm font-normal">
+            <span>{{ data.read_duration.symbolsCount }}</span>
+            ・
+            <span>{{ data.read_duration.symbolsTime }}</span>
           </h2>
         </template>
       </div>
@@ -45,7 +63,10 @@
 
 <script lang="ts">
 import { useAppStore } from '@/store/app'
-import { computed, defineComponent, ref, toRefs, watch } from 'vue'
+import { computed, defineComponent, toRefs } from 'vue'
+import { dateFormater } from '@/utils'
+import { Category } from '@/models/Article.class'
+import LyraLink from '@/components/LyraLink.vue'
 
 export default defineComponent({
   props: {
@@ -55,27 +76,37 @@ export default defineComponent({
       default: 'home'
     }
   },
+  components: {
+    LyraLink
+  },
   setup(props) {
     const appStore = useAppStore()
+    const data = toRefs(props).data
     const defaultUrl = 'https://ftp.bmp.ovh/imgs/2021/07/68fc9e979e121749.jpg'
-    const background: string = toRefs(props).data.value?.background
-    const coverHeight = ref({
-      height: window.innerWidth > 768 ? '520px' : '325px'
-    })
-    watch(
-      () => appStore.themeConfig.site.cover_percentage,
-      newState => {
-        if (window.innerWidth > 768)
-          coverHeight.value.height = `${
-            (window.innerHeight * Number(newState)) / 100
-          }px`
+    const background: string = data.value?.background ?? data.value?.cover
+    const coverHeight = computed(() => {
+      let height = ''
+      if (appStore.themeConfig.site.cover_percentage === 0) {
+        height = window.innerWidth > 768 ? '520px' : '325px'
+      } else {
+        height = `${
+          (window.innerHeight *
+            Number(appStore.themeConfig.site.cover_percentage)) /
+          100
+        }px`
       }
-    )
+      return `height: ${height}`
+    })
+    const computCategory = (cats: [Category]) => {
+      return cats.map(item => item.name).join('·')
+    }
     return {
       imgUrl: computed(() => {
         return background || defaultUrl
       }),
-      coverHeight
+      coverHeight,
+      dateFormater,
+      computCategory
     }
   }
 })

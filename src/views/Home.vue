@@ -13,19 +13,15 @@
           2xl:max-w-6xl
         "
       >
-        <!-- <template v-if="postlist.posts.length <= 0">
-          <ArticleCard v-for="i in 3" :key="i" :post="{}" />
-        </template>
-        <template v-else> -->
         <ArticleCard
           v-for="post in postlist.posts"
           :key="post.name"
           :post="post"
           @postClick="pushPage(`/post/${post.slug}`)"
         />
-        <!-- </template> -->
 
         <Paginator
+          v-if="postlist.posts.length > 0"
           :totalPage="pagination.totalPage"
           :pageSize="pagination.pageSize"
           :current="pagination.current"

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <PageCover :data="cover" />
+    <PageCover :data="postData" type="post" />
     <div class="relative w-full">
       <div
         class="

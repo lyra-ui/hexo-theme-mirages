@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-start items-center flex-grow">
     <div
-      class="mr-1 ml-1 cursor-pointer p-2"
+      class="navi-item trans-300-ease-all mr-1 ml-1 cursor-pointer p-2"
       v-for="route in routes"
       :key="route.name"
       @click="pushPage(route.path)"
@@ -49,3 +49,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.navi-item {
+  color: var(--text-normal);
+  &:hover {
+    color: var(--text-normal-hover);
+  }
+}
+</style>

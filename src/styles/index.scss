@@ -8,6 +8,10 @@
 @import './components/prism-dark.scss';
 @import './components/prism-mirages.scss';
 
+
+body {
+  background: var(--background-nomal);
+}
 body * {
   &::selection {
     background: #1abc9c !important;

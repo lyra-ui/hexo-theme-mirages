@@ -1,5 +1,3 @@
-const { data } = require('autoprefixer')
-const { configs } = require('eslint-plugin-prettier')
 const { postListMapper, postMapper } = require('../helpers/mapper')
 
 class PostGenerator {
