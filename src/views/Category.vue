@@ -39,6 +39,8 @@ import { useSpecificlistStore } from '@/store/specificlist'
 import { GridItem, PostList } from '@/models/Article.class'
 import { randomValue } from '@/utils'
 import { useAppStore } from '@/store/app'
+import useMixin from '@/utils/mixin'
+
 export default defineComponent({
   components: {
     PageCover,
@@ -50,6 +52,7 @@ export default defineComponent({
     const specificlistStore = useSpecificlistStore()
     const postlist = ref(new PostList().posts)
     const currentCategory = ref('')
+    const { pushPage } = useMixin()
     const fetchAllCategories = async () => {
       await specificlistStore.fetchCategories().then(async () => {
         if (specificlistStore.categories.length > 0) {
@@ -80,7 +83,8 @@ export default defineComponent({
         title: '分类'
       },
       currentCategory,
-      changeCategory
+      changeCategory,
+      pushPage
     }
   }
 })
