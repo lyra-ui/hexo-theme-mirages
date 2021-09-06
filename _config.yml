@@ -7,11 +7,11 @@ site:
   # Site‘s
   announcement: Lyra is a constellation, also called Lyrids.
   # The url of logo picture, or site name (less than 16 characters is better)
-  logo:
+  logo: Logo
   # Site’s favicon
-  favicon:
+  favicon: https://i.loli.net/2021/09/06/QqSY7X2B4oLMa3b.png
   # Homepage‘s background
-  background:
+  background: https://i.loli.net/2021/09/06/TVHoKB7OvpyYP8I.jpg
   # Percentage of the image on each page
   # Value between 30 to 70
   cover_percentage: 47.5
@@ -34,9 +34,9 @@ pins:
 # The main author, you can set custom author in posts.
 author:
   name: Lyra
-  avator: ''
-  link: ''
-  description: ''
+  avator: https://i.loli.net/2021/09/06/hSuVoIbdfsKcQry.jpg
+  link: https://github.com
+  description: Hi, I’m description of myself.
 
 # If no image is set as the `site backgroud`, `post cover`, `post background`, etc.
 # Theme will choose one of image in pictures randomly,
@@ -49,7 +49,7 @@ pictures:
   ]
 
 # Custom site footer, HTML available
-footer:
+footer: Hello, this is a custom footer.
 
 # Needs set some configs at _config.yml
 # See https://github.com/hexojs/hexo-generator-feed
@@ -58,20 +58,12 @@ rss:
   path: '/'
 #
 menu:
-  category: true,
-  tags: false,
-  archives: true,
-  custom:
-    # [
-    #   {
-    #     name: Lyra,
-    #     path: /
-    #   }
-    # ]
-    # Example
-    # Lyra:
-    #   name: Lyra
-    #   path: ''
+  category: true
+  tags: true
+  archives: true
+  Lyra:
+    name: Lyra
+    path: '/'
 
 #! ---------------------------------------------------------------
 #! Socials Config
@@ -81,11 +73,9 @@ socials:
   github: ''
   twitter: ''
   weibo: ''
-  customs:
-    # Example
-    # facebook:
-    #   icon: ''
-    #   link: ''
+  facebook:
+    icon: ''
+    link: ''
 
 theme_preset:
   main_color: '#1abc9c'

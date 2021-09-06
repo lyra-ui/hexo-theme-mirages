@@ -5,7 +5,7 @@
     @click="pushPage('/')"
   >
     <span class="w-full text-xl leading-normal pt-1 pb-1 font-bold">
-      {{ logo }}LOGO
+      {{ logo }}
     </span>
   </div>
 </template>

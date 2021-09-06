@@ -82,8 +82,6 @@ export default defineComponent({
   setup(props) {
     const appStore = useAppStore()
     const data = toRefs(props).data
-    const defaultUrl = 'https://ftp.bmp.ovh/imgs/2021/07/68fc9e979e121749.jpg'
-    const background: string = data.value?.background ?? data.value?.cover
     const coverHeight = computed(() => {
       let height = ''
       if (appStore.themeConfig.site.cover_percentage === 0) {
@@ -97,13 +95,20 @@ export default defineComponent({
       }
       return `height: ${height}`
     })
+    const imgUrl = computed(() => {
+      if (data.value?.background) {
+        return data.value?.background
+      }
+      if (data.value?.cover) {
+        return data.value?.cover
+      }
+      return 'https://ftp.bmp.ovh/imgs/2021/07/68fc9e979e121749.jpg'
+    })
     const computCategory = (cats: [Category]) => {
       return cats.map(item => item.name).join('·')
     }
     return {
-      imgUrl: computed(() => {
-        return background || defaultUrl
-      }),
+      imgUrl,
       coverHeight,
       dateFormater,
       computCategory

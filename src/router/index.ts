@@ -22,7 +22,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/categories',
     name: 'Categories',
     component: () =>
-      import(/* webpackChunkName: "categories" */ '../views/Category.vue')
+      import(/* webpackChunkName: "categories" */ '../views/Categories.vue')
+  },
+  {
+    path: '/category/:slug*',
+    name: 'Category',
+    component: () =>
+      import(/* webpackChunkName: "category" */ '../views/Category.vue')
   },
   {
     path: '/archives',
@@ -36,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "tags" */ '../views/Tags.vue')
   },
   {
-    path: '/tag/:slug',
+    path: '/tag/:slug*',
     name: 'Tag',
     component: () => import(/* webpackChunkName: "tag" */ '../views/Tag.vue')
   },

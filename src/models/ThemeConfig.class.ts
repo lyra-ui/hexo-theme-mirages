@@ -3,7 +3,7 @@ interface ThemeRaw {
   theme_config: {
     site: GeneralOptions
     author: GeneralOptions
-    custom_menus: [StringOptions]
+    menu: GeneralOptions
     socials: GeneralOptions
     theme_preset: GeneralOptions
     qr_code: StringOptions
@@ -86,21 +86,69 @@ export class CustomMenu {
 }
 
 export class Menu {
-  category = true
-  tags = true
-  archives = true
-  customs: CustomMenu[] = []
+  name = ''
+  path = ''
+  children: Menu[] = []
+  constructor(menu: GeneralOptions) {
+    this.name = menu.name
+    this.path = menu.path ? menu.path : null
+    this.children = menu.children
+      ? Object.keys(menu.children).map(
+          (key: string) => new Menu(menu.children[key])
+        )
+      : []
+  }
+}
+
+interface Menus {
+  menus: { [key: string]: Menu }
+}
+
+export class ThemeMenu implements Menus {
+  menus: { [key: string]: Menu } = {}
   constructor(raw?: GeneralOptions) {
-    if (raw) {
-      for (const key of Object.keys(this)) {
-        if (Object.prototype.hasOwnProperty.call(raw, key)) {
-          if (key === 'custom') {
-            this.customs = raw[key].map(
-              (item: StringOptions) => new CustomMenu(item)
-            )
-          } else {
-            Object.assign(this, { [key]: raw[key] })
+    console.log(raw);
+
+    const extract: GeneralOptions = {
+      category: {
+        name: 'Category',
+        children: {
+          uncategorized: {
+            name: 'uncategorized',
+            path: '/category/uncategorized'
           }
+        }
+      },
+      archives: {
+        name: 'Archives',
+        path: '/archives'
+      },
+      tags: {
+        name: 'Tags',
+        path: '/tags'
+      },
+      about: {
+        name: 'About',
+        path: '/about'
+      }
+    }
+
+    const defaultMenus = Object.keys(extract)
+    if (raw) {
+      // Theme default menus
+      for (const menu of defaultMenus) {
+        if (typeof raw[menu] === 'boolean' && raw[menu]) {
+          Object.assign(this.menus, { [menu]: new Menu(extract[menu]) })
+        }
+      }
+      // Theme custom menus
+      for (const otherMenu of Object.keys(raw)) {
+        console.log(raw[otherMenu], otherMenu)
+
+        if (defaultMenus.indexOf(otherMenu) < 0 && raw[otherMenu]?.name) {
+          Object.assign(this.menus, {
+            [otherMenu]: new Menu(raw[otherMenu])
+          })
         }
       }
     }
@@ -235,18 +283,9 @@ interface PluginsData {
   }
   copy_protection: {
     enable: boolean
-    author: {
-      cn: string
-      en: string
-    }
-    link: {
-      cn: string
-      en: string
-    }
-    license: {
-      cn: string
-      en: string
-    }
+    author: string
+    link: string
+    license: string
   }
 }
 
@@ -285,18 +324,9 @@ export class Plugins implements PluginsData {
   }
   copy_protection = {
     enable: true,
-    author: {
-      cn: '',
-      en: ''
-    },
-    link: {
-      cn: '',
-      en: ''
-    },
-    license: {
-      cn: '',
-      en: ''
-    }
+    author: '',
+    link: '',
+    license: ''
   }
   constructor(raw?: GeneralOptions) {
     if (raw) {
@@ -312,7 +342,7 @@ export class Plugins implements PluginsData {
 export class ThemeConfig {
   site = new Site()
   author = new Author()
-  menu = new Menu()
+  menu = new ThemeMenu()
   socials = new Socials()
   theme_preset = new ThemePreset()
   qrcode = new QRCode()
@@ -325,7 +355,7 @@ export class ThemeConfig {
     if (rawConfig) {
       this.site = new Site(rawConfig.site)
       this.author = new Author(rawConfig.author)
-      this.menu = new Menu(rawConfig.custom_menus)
+      this.menu = new ThemeMenu(rawConfig.menu)
       this.socials = new Socials(rawConfig.socials)
       this.theme_preset = new ThemePreset(rawConfig.theme_preset)
       this.qrcode = new QRCode(rawConfig.qr_code)

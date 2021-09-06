@@ -12,38 +12,16 @@
 </template>
 
 <script lang="ts">
+import { useAppStore } from '@/store/app'
 import useMixin from '@/utils/mixin'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
     const { pushPage } = useMixin()
-    const defaultRoutes = [
-      {
-        name: '分类',
-        path: '/categories',
-        enable: true
-      },
-      {
-        name: '归档',
-        path: '/archives',
-        enable: true
-      },
-      {
-        name: '标签',
-        path: '/tags',
-        enable: true
-      },
-      {
-        name: '关于',
-        path: '/about',
-        enable: true
-      }
-    ]
+    const appStore = useAppStore()
     return {
-      routes: computed(() => {
-        return defaultRoutes
-      }),
+      routes: computed(() => appStore.themeConfig.menu.menus),
       pushPage
     }
   }
