@@ -153,5 +153,6 @@ export default defineComponent({
 #app-container {
   background: var(--background-nomal);
   color: var(--text-color);
+  min-height: 0;
 }
 </style>
