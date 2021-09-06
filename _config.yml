@@ -70,12 +70,13 @@ menu:
 #! @docs
 #! ---------------------------------------------------------------
 socials:
-  github: ''
-  twitter: ''
-  weibo: ''
+  github: 'https://github.com'
+  twitter: 'https://twitter.com'
+  weibo: 'https://weibo.com'
   facebook:
-    icon: ''
-    link: ''
+    name: 'facebook'
+    icon: 'fa fa-facebook'
+    link: 'https://facebook.com'
 
 theme_preset:
   main_color: '#1abc9c'

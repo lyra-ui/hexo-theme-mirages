@@ -4,6 +4,7 @@ import { isExternal } from '.'
 export default function (): any {
   const router = useRouter()
   const pushPage = (path: string) => {
+    if (!path) return
     if (isExternal(path)) {
       window.open(path)
     } else {

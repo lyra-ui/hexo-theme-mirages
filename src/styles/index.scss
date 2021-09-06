@@ -42,12 +42,8 @@ body *::-webkit-scrollbar-thumb {
     background-color: #b9b9b9;
   }
 }
-
 #app {
-  @apply flex flex-col justify-center items-center min-h-screen;
-  #app-container {
-    @apply flex-grow;
-  }
+  @apply relative;
 }
 /** nprogress styles */
 #loading-bar-wrapper #nprogress {

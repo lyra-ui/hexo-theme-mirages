@@ -107,7 +107,7 @@ interface Menus {
 export class ThemeMenu implements Menus {
   menus: { [key: string]: Menu } = {}
   constructor(raw?: GeneralOptions) {
-    console.log(raw);
+    console.log(raw)
 
     const extract: GeneralOptions = {
       category: {
@@ -203,13 +203,11 @@ class CustomSocial {
 export class CustomSocials implements EmptyCheckable {
   socials: CustomSocial[] = []
 
-  constructor(raw?: [StringOptions]) {
+  constructor(raw?: { [key: string]: StringOptions }) {
     if (raw) {
       Object.assign(
         this.socials,
-        raw.map((item: StringOptions) => {
-          return new CustomSocial(item)
-        })
+        Object.keys(raw).map((key: string) => new CustomSocial(raw[key]))
       )
     }
   }

@@ -1,14 +1,27 @@
 <template>
-  <div id="app-container" class="relative w-full overflow-hidden">
-    <MainHeader />
-    <div id="loading-bar-wrapper"></div>
-    <router-view v-slot="{ Component }">
-      <transition name="fade-slide-y" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+  <MainHeader />
+  <MobileMenu :isActive="showSideBar" @toggle="toggleSidebar" />
+  <div
+    id="body"
+    class="
+      flex flex-col
+      justify-center
+      items-center
+      min-h-screen
+      trans-500-ease-all
+    "
+    :class="{ 'show-sidebar': showSideBar }"
+  >
+    <div id="app-container" class="relative flex-grow w-full overflow-hidden">
+      <div id="loading-bar-wrapper"></div>
+      <router-view v-slot="{ Component }">
+        <transition name="fade-slide-y" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
+    <Footer />
   </div>
-  <Footer />
 </template>
 
 <script lang="ts">
@@ -17,11 +30,13 @@ import { useAppStore } from './store/app'
 import { useCommonStore } from '@/store/common'
 import { changeFavicon, getCookie, setCookie } from './utils'
 import { MainHeader } from '@/components/Header'
+import { MobileMenu } from '@/components/MobileMenu'
 import Footer from '@/components/Footer.vue'
 import { useSpecificlistStore } from './store/specificlist'
 export default defineComponent({
   components: {
     MainHeader,
+    MobileMenu,
     Footer
   },
   setup() {
@@ -154,5 +169,16 @@ export default defineComponent({
   background: var(--background-nomal);
   color: var(--text-color);
   min-height: 0;
+}
+#body.show-sidebar {
+  overflow: hidden;
+  max-height: 100vh;
+  transform: translateX(17.5rem);
+}
+#mobile-menu.show-sidebar {
+  left: 0;
+}
+#toggle-menu.show-sidebar {
+  transform: translateX(15rem);
 }
 </style>
