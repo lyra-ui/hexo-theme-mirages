@@ -21,6 +21,12 @@
   --main-gradient: linear-gradient(25deg, #3bb0da, #92b0a8, #bbb175, #d7b23a);
   --text-grid: #333;
   --background-grid-item: #f0f0f0;
+
+  --text-mobile: #555;
+  --text-mobile-navigator: #333;
+  --background-mobile: #fafafa;
+  --background-mobile-deep: #ffffff;
+  --mobile-border: #efefef;
 }
 
 .theme-dark {
@@ -44,7 +50,12 @@
   --text-grid: #f0f0f0;
   --background-grid-item: #403e3e;
 
-
   --skeleton-bg: #2e2e2e;
   --skeleton-hl: #363636;
+
+  --text-mobile: #f0f0f0;
+  --text-mobile-navigator: #ccc;
+  --background-mobile: #191819;
+  --background-mobile-deep: #131313;
+  --mobile-border: #131313;
 }

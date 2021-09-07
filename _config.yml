@@ -61,6 +61,7 @@ menu:
   category: true
   tags: true
   archives: true
+  about: true
   Lyra:
     name: Lyra
     path: '/'

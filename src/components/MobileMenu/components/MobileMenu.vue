@@ -30,7 +30,9 @@
         </div>
         <!-- Search Box -->
         <div class="search-box relative">
-          <input type="text" class="search-input" placeholder="搜索..." />
+          <div class="p-4 pr-7 search-input-box">
+            <input type="text" class="search-input" placeholder="搜索..." />
+          </div>
           <div
             class="
               absolute
@@ -49,18 +51,14 @@
         </div>
         <!-- Navigator -->
         <ul class="mobile-navigator relative">
-          <li><div>首页</div></li>
+          <li><div @click="pushHandler('/')">首页</div></li>
           <li v-for="route in routes" :key="route.name">
-            <div>{{ route.name }}</div>
+            <div @click="pushHandler(route.path)">{{ route.name }}</div>
           </li>
         </ul>
       </div>
       <!-- Menu Toolbar -->
-      <div
-        id="menu-toolbar"
-        class="trans-500-ease-all"
-        style="background-color: #131313"
-      >
+      <div id="menu-toolbar" class="trans-500-ease-all">
         <div class="toolbar-static flex items-center h-full justify-center">
           <div class="tool-icon trans-300-ease-all">
             <i class="fa fa-font" aria-hidden="true"></i>
@@ -87,25 +85,30 @@
 <script lang="ts">
 import { useAppStore } from '@/store/app'
 import { computed, defineComponent } from 'vue'
+import useMixin from '@/utils/mixin'
+import { Menu } from '@/models/ThemeConfig.class'
 
 export default defineComponent({
   props: {
     isActive: Boolean
   },
   emits: ['toggle'],
-  components: {
-    Navigator
-  },
   setup(props, { emit }) {
+    const { pushPage } = useMixin()
     const appStore = useAppStore()
     const toggleHandler = () => {
       emit('toggle')
+    }
+    const pushHandler = (path: string) => {
+      toggleHandler()
+      pushPage(path)
     }
     return {
       routes: computed(() => appStore.themeConfig.menu.menus),
       author: computed(() => appStore.themeConfig.author),
       toolbar: computed(() => appStore.themeConfig.socials),
-      toggleHandler
+      toggleHandler,
+      pushHandler
     }
   }
 })
@@ -121,12 +124,12 @@ export default defineComponent({
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 6.25rem;
+  color: var(--text-mobile);
+  background: var(--background-mobile);
 }
-
-.theme-light {
-  #mobile-menu,
-  #menu-toolbar {
-    border-right: 0.0625rem solid #efefef;
+.mobile-avator {
+  img {
+    box-shadow: 0 0 1rem 0.03125rem rgb(0 0 0 / 12%);
   }
 }
 
@@ -150,15 +153,25 @@ export default defineComponent({
   left: -17.5rem;
   width: 17.5rem;
   transition: all 0.3s linear;
+  background: var(--background-mobile-deep);
+  box-shadow: 0 -0.3125rem 0.3125rem -0.3125rem rgb(0 0 0 / 12%);
+}
+.show-sidebar {
+  #mobile-menu {
+    border-right: 0.0625rem solid var(--mobile-border);
+  }
 }
 .toolbar-static {
   height: 3.625rem;
 }
 .search-box {
+  .search-input-box {
+    background: var(--background-mobile-deep) no-repeat 90%;
+  }
   .search-input {
     padding: 0;
     width: 100%;
-    background: #131313 no-repeat 90%;
+    background: transparent;
     border: none;
     color: #1abc9c;
     font-size: 1rem;
@@ -166,6 +179,7 @@ export default defineComponent({
     text-align: center;
   }
   button {
+    color: var(--text-mobile-navigator);
     background: transparent;
   }
 }
@@ -185,7 +199,7 @@ ul {
       padding: 0.375rem 1.75rem;
       position: relative;
       line-height: 2.25rem;
-      color: #9ba3ad;
+      color: var(--text-mobile-navigator);
       display: block;
       font-size: 1.25rem;
       text-align: center;

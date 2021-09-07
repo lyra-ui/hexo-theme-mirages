@@ -33,7 +33,7 @@ import { MainHeader } from '@/components/Header'
 import { MobileMenu } from '@/components/MobileMenu'
 import Footer from '@/components/Footer.vue'
 import { useSpecificlistStore } from './store/specificlist'
-import { useNavigatorStore } from './store/navigator'
+
 export default defineComponent({
   components: {
     MainHeader,
@@ -44,8 +44,7 @@ export default defineComponent({
     const appStore = useAppStore()
     const commonStore = useCommonStore()
     const specificlistStore = useSpecificlistStore()
-    const navigatorStore = useNavigatorStore()
-    const MOBILE_WITH = 996
+    const MOBILE_WITH = 768
     const FOOTER_MIN_WITH = 396
 
     let pagelink = ``
@@ -61,6 +60,7 @@ export default defineComponent({
       const rect = document.body.getBoundingClientRect()
       const mobileState = rect.width - 1 < MOBILE_WITH
       const footerState = rect.width < FOOTER_MIN_WITH
+      if (!mobileState && showSideBar) showSideBar.value = false
       if (isMobile.value !== mobileState)
         commonStore.changeMobileState(mobileState)
       if (isDoubleLineFooter.value !== footerState)

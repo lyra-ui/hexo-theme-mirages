@@ -111,24 +111,19 @@ export class ThemeMenu implements Menus {
 
     const extract: GeneralOptions = {
       category: {
-        name: 'Category',
-        children: {
-          uncategorized: {
-            name: 'uncategorized',
-            path: '/category/uncategorized'
-          }
-        }
+        name: '分类',
+        path: '/categories'
       },
       archives: {
-        name: 'Archives',
+        name: '归档',
         path: '/archives'
       },
       tags: {
-        name: 'Tags',
+        name: '标签',
         path: '/tags'
       },
       about: {
-        name: 'About',
+        name: '关于',
         path: '/about'
       }
     }
@@ -143,8 +138,6 @@ export class ThemeMenu implements Menus {
       }
       // Theme custom menus
       for (const otherMenu of Object.keys(raw)) {
-        console.log(raw[otherMenu], otherMenu)
-
         if (defaultMenus.indexOf(otherMenu) < 0 && raw[otherMenu]?.name) {
           Object.assign(this.menus, {
             [otherMenu]: new Menu(raw[otherMenu])
@@ -159,17 +152,17 @@ export class Socials implements EmptyCheckable {
   github = ''
   twitter = ''
   weibo = ''
-  customs = new CustomSocials()
+  customs: { [key: string]: CustomSocial } = {}
 
   constructor(raw?: GeneralOptions) {
     if (raw) {
-      for (const key of Object.keys(this)) {
-        if (Object.prototype.hasOwnProperty.call(raw, key)) {
-          if (key === 'custom') {
-            Object.assign(this.customs, new CustomSocials(raw[key]))
-          } else {
-            Object.assign(this, { [key]: raw[key] })
-          }
+      for (const key of Object.keys(raw)) {
+        if (Object.prototype.hasOwnProperty.call(this, key)) {
+          Object.assign(this, { [key]: raw[key] })
+        } else {
+          Object.assign(this.customs, {
+            [key]: new CustomSocial(raw[key])
+          })
         }
       }
     }
@@ -180,7 +173,7 @@ export class Socials implements EmptyCheckable {
       this.github.length === 0 &&
       this.twitter.length === 0 &&
       this.weibo.length === 0 &&
-      this.customs.isEmpty()
+      this.customs === {}
     )
   }
 }
