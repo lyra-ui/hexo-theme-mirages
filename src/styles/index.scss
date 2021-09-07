@@ -43,7 +43,7 @@ body *::-webkit-scrollbar-thumb {
   }
 }
 #app {
-  @apply relative;
+  @apply relative overflow-x-hidden w-full;
 }
 /** nprogress styles */
 #loading-bar-wrapper #nprogress {

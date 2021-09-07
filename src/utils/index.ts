@@ -10,15 +10,14 @@ const getSystemMode = (): string => {
 }
 
 export const changeFavicon = (favicon: string): void => {
+  console.log(222)
+
   const link = document.querySelector("link[rel~='icon']")
-  if (link) {
-    link.setAttribute('herf', favicon)
-  } else {
-    const node = document.createElement('link')
-    node.rel = 'icon'
-    node.href = favicon
-    document.querySelector('head')?.appendChild(node)
-  }
+  link?.remove()
+  const node = document.createElement('link')
+  node.rel = 'icon'
+  node.href = favicon
+  document.querySelector('head')?.appendChild(node)
 }
 
 export const getCookie = (key: string): string | undefined => {

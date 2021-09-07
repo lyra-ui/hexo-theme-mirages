@@ -33,6 +33,7 @@ import { MainHeader } from '@/components/Header'
 import { MobileMenu } from '@/components/MobileMenu'
 import Footer from '@/components/Footer.vue'
 import { useSpecificlistStore } from './store/specificlist'
+import { useNavigatorStore } from './store/navigator'
 export default defineComponent({
   components: {
     MainHeader,
@@ -43,6 +44,7 @@ export default defineComponent({
     const appStore = useAppStore()
     const commonStore = useCommonStore()
     const specificlistStore = useSpecificlistStore()
+    const navigatorStore = useNavigatorStore()
     const MOBILE_WITH = 996
     const FOOTER_MIN_WITH = 396
 
@@ -114,11 +116,6 @@ export default defineComponent({
     const toggleSidebar = () => {
       showSideBar.value = !showSideBar.value
     }
-    const closeSidebar = () => {
-      if (showSideBar.value) {
-        showSideBar.value = false
-      }
-    }
 
     const loadingBarClass = ref({
       'nprogress-custom-parent': false
@@ -156,7 +153,6 @@ export default defineComponent({
       showSideBar,
       showAnnouncement,
       toggleSidebar,
-      closeSidebar,
       confirmAnnouncement,
       loadingBarClass
     }
@@ -170,13 +166,13 @@ export default defineComponent({
   color: var(--text-color);
   min-height: 0;
 }
+
 #body.show-sidebar {
-  overflow: hidden;
-  max-height: 100vh;
   transform: translateX(17.5rem);
 }
-#mobile-menu.show-sidebar {
-  left: 0;
+
+#mobile-navigator.show-sidebar {
+  transform: translateX(17.5rem);
 }
 #toggle-menu.show-sidebar {
   transform: translateX(15rem);

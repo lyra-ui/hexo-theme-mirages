@@ -125,10 +125,7 @@ busuanzi:
 copy_protection:
   enable: false
   author:
-    cn: 作者
-    en: Author
   link:
-    cn:
 
 injects:
   scripts:
