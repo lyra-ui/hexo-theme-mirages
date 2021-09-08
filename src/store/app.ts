@@ -38,7 +38,8 @@ export const useAppStore = defineStore({
       this.hexoCongfig = new HexoConfig(data)
     },
     toggleTheme(theme?: string) {
-      setTheme(theme ? theme : 'auto')
+      this.theme = theme ? theme : 'auto'
+      setTheme(this.theme)
     },
     startLoading() {
       if (this.appLoading) return

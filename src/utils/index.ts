@@ -38,6 +38,8 @@ export const setTheme = (theme: string): void => {
       document.body.classList.add('theme-light')
     }
   }
+
+  setCookie('theme', theme)
   const _theme = theme === 'auto' ? getSystemMode() : theme
   _setTheme(_theme)
 }

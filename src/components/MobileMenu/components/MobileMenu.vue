@@ -60,17 +60,26 @@
       <!-- Menu Toolbar -->
       <div id="menu-toolbar" class="trans-500-ease-all">
         <div class="toolbar-static flex items-center h-full justify-center">
-          <div class="tool-icon trans-300-ease-all">
-            <i class="fa fa-font" aria-hidden="true"></i>
+          <div class="tool-icon trans-300-ease-all" v-if="rss.enable">
+            <i class="fa fa-rss" aria-hidden="true"></i>
+          </div>
+          <div
+            class="tool-icon trans-300-ease-all"
+            v-if="toolbar.github && toolbar.github.length > 0"
+          >
+            <a :href="toolbar.github">
+              <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
           </div>
           <div class="tool-icon trans-300-ease-all">
-            <i class="fa fa-font" aria-hidden="true"></i>
+            <a :href="toolbar.twitter">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
           </div>
           <div class="tool-icon trans-300-ease-all">
-            <i class="fa fa-font" aria-hidden="true"></i>
-          </div>
-          <div class="tool-icon trans-300-ease-all">
-            <i class="fa fa-font" aria-hidden="true"></i>
+            <a :href="toolbar.weibo">
+              <i class="fa fa-weibo" aria-hidden="true"></i>
+            </a>
           </div>
           <div class="tool-icon trans-300-ease-all">
             <i class="fa fa-font" aria-hidden="true"></i>
@@ -86,7 +95,6 @@
 import { useAppStore } from '@/store/app'
 import { computed, defineComponent } from 'vue'
 import useMixin from '@/utils/mixin'
-import { Menu } from '@/models/ThemeConfig.class'
 
 export default defineComponent({
   props: {
@@ -107,6 +115,7 @@ export default defineComponent({
       routes: computed(() => appStore.themeConfig.menu.menus),
       author: computed(() => appStore.themeConfig.author),
       toolbar: computed(() => appStore.themeConfig.socials),
+      rss: computed(() => appStore.themeConfig.rss),
       toggleHandler,
       pushHandler
     }
@@ -127,6 +136,7 @@ export default defineComponent({
   color: var(--text-mobile);
   background: var(--background-mobile);
 }
+
 .mobile-avator {
   img {
     box-shadow: 0 0 1rem 0.03125rem rgb(0 0 0 / 12%);
@@ -148,6 +158,7 @@ export default defineComponent({
     background: var(--text-normal);
   }
 }
+
 #menu-toolbar {
   @apply fixed bottom-0 overflow-hidden;
   left: -17.5rem;

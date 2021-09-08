@@ -9,6 +9,10 @@ interface ThemeRaw {
     qr_code: StringOptions
     pictures: [string]
     plugin: GeneralOptions
+    rss: {
+      enable: boolean
+      path: string
+    }
     footer: string
     version: string
   }
@@ -339,6 +343,10 @@ export class ThemeConfig {
   qrcode = new QRCode()
   pictures: string[] = []
   plugins = new Plugins()
+  rss = {
+    enable: false,
+    path: ''
+  }
   footer = ''
   version = ''
   constructor(raw?: ThemeRaw) {
@@ -353,6 +361,7 @@ export class ThemeConfig {
       this.theme_preset = new ThemePreset(rawConfig.theme_preset)
       this.pictures = rawConfig.pictures
       this.plugins = new Plugins(rawConfig)
+      this.rss = rawConfig.rss
       this.version = rawConfig.version
       this.footer = rawConfig.footer
     }

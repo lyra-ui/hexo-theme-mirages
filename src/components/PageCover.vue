@@ -38,10 +38,7 @@
           </h1>
           <h2 class="text-sm font-normal">
             <span v-if="data.author">
-              <LyraLink
-                :href="`/author/${data.author.slug}`"
-                :text="data.author.name"
-              />
+              <LyraLink :text="data.author.name" />
             </span>
             ・
             <span>{{ dateFormater(data.date, 'YYYY 年 MM 月 DD 日') }}</span>
