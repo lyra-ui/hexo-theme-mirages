@@ -51,8 +51,14 @@
       </a>
     </div>
     <div class="tool-icon trans-300-ease-all mr-1 ml-1" @click="toggleTheme">
-      <a>
+      <a v-if="theme === 'auto'">
         <i class="fa fa-adjust" aria-hidden="true"></i>
+      </a>
+      <a v-if="theme === 'theme-light'">
+        <i class="fa fa-moon-o" aria-hidden="true"></i>
+      </a>
+      <a v-if="theme === 'theme-dark'">
+        <i class="fa fa-sun-o" aria-hidden="true"></i>
       </a>
     </div>
     <div

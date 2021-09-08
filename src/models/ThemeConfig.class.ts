@@ -111,8 +111,6 @@ interface Menus {
 export class ThemeMenu implements Menus {
   menus: { [key: string]: Menu } = {}
   constructor(raw?: GeneralOptions) {
-    console.log(raw)
-
     const extract: GeneralOptions = {
       category: {
         name: '分类',

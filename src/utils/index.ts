@@ -10,8 +10,6 @@ const getSystemMode = (): string => {
 }
 
 export const changeFavicon = (favicon: string): void => {
-  console.log(222)
-
   const link = document.querySelector("link[rel~='icon']")
   link?.remove()
   const node = document.createElement('link')

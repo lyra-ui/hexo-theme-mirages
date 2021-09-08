@@ -81,8 +81,16 @@
               <i class="fa fa-weibo" aria-hidden="true"></i>
             </a>
           </div>
-          <div class="tool-icon trans-300-ease-all">
-            <i class="fa fa-font" aria-hidden="true"></i>
+          <div class="tool-icon trans-300-ease-all" @click="toggleTheme">
+            <a v-if="theme === 'auto'">
+              <i class="fa fa-adjust" aria-hidden="true"></i>
+            </a>
+            <a v-if="theme === 'theme-light'">
+              <i class="fa fa-moon-o" aria-hidden="true"></i>
+            </a>
+            <a v-if="theme === 'theme-dark'">
+              <i class="fa fa-sun-o" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <div class="toolbar-custom flex"></div>
@@ -111,13 +119,28 @@ export default defineComponent({
       toggleHandler()
       pushPage(path)
     }
+    const toggleTheme = () => {
+      switch (appStore.theme) {
+        case 'auto':
+          appStore.toggleTheme('theme-light')
+          break
+        case 'theme-light':
+          appStore.toggleTheme('theme-dark')
+          break
+        default:
+          appStore.toggleTheme('auto')
+          break
+      }
+    }
     return {
       routes: computed(() => appStore.themeConfig.menu.menus),
       author: computed(() => appStore.themeConfig.author),
       toolbar: computed(() => appStore.themeConfig.socials),
       rss: computed(() => appStore.themeConfig.rss),
+      theme: computed(() => appStore.theme),
       toggleHandler,
-      pushHandler
+      pushHandler,
+      toggleTheme
     }
   }
 })

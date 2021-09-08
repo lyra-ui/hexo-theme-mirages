@@ -25,7 +25,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, ref, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onMounted,
+  ref,
+  watch
+} from 'vue'
 import { useAppStore } from './store/app'
 import { useCommonStore } from '@/store/common'
 import { changeFavicon, getCookie, setCookie } from './utils'
@@ -87,7 +94,7 @@ export default defineComponent({
 
     const darkModeHandler = () => {
       const media = window.matchMedia('(prefers-color-scheme: dark)')
-      appStore.toggleTheme()
+      appStore.toggleTheme(appStore.theme)
       media.onchange = () => {
         if (appStore.theme === 'auto') {
           const theme = media.matches ? 'theme-dark' : 'theme-light'
@@ -99,7 +106,7 @@ export default defineComponent({
     const initialApp = async () => {
       initResizeEvent()
       intialCopyrightScript()
-      darkModeHandler()
+      // darkModeHandler()
       await appStore.fecthConfig().then(() => {
         // Change favicon dynamically.
         const favicon = appStore.themeConfig.site.favicon
@@ -111,6 +118,8 @@ export default defineComponent({
     }
 
     onBeforeMount(initialApp)
+
+    onMounted(darkModeHandler)
 
     let showSideBar = ref(false)
     const toggleSidebar = () => {
