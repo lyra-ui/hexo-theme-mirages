@@ -92,10 +92,10 @@ function pageMapper(page, configs) {
       updated: page.updated,
       comments: page.comments,
       path: path,
-      covers: page.cover || randomValue(configs.theme_config.pictures),
+      cover: page.cover || randomValue(configs.theme_config.pictures),
       excerpt: page.excerpt,
       content: page.content,
-      count_time: symbolsCountTime(page.content)
+      read_duration: symbolsCountTime(page.content)
     })
   }
 }

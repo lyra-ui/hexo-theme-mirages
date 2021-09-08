@@ -40,6 +40,8 @@ export class Post {
   content = ''
   pinned = false
   preview = ''
+  prev_post = {}
+  next_post = {}
   read_duration = {
     symbolsCount: 0,
     symbolsTime: '0s'

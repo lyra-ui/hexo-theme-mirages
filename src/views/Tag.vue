@@ -33,7 +33,7 @@ import PageCover from '@/components/PageCover.vue'
 import ArticleCard from '@/components/ArticleCard.vue'
 import { useSpecificlistStore } from '@/store/specificlist'
 import { PostList } from '@/models/Article.class'
-
+import useMixin from '@/utils/mixin'
 export default defineComponent({
   components: {
     PageCover,
@@ -43,7 +43,7 @@ export default defineComponent({
     const appStore = useAppStore()
     const specificlistStore = useSpecificlistStore()
     const route = useRoute()
-
+    const { pushPage } = useMixin()
     let slug = String(route.params.slug)
     const postlist = ref(new PostList().posts)
 
@@ -63,7 +63,8 @@ export default defineComponent({
 
     return {
       cover,
-      postlist
+      postlist,
+      pushPage
     }
   }
 })

@@ -39,7 +39,7 @@ import { useSpecificlistStore } from '@/store/specificlist'
 import { GridItem, PostList } from '@/models/Article.class'
 import { randomValue } from '@/utils'
 import { useAppStore } from '@/store/app'
-
+import useMixin from '@/utils/mixin'
 export default defineComponent({
   components: {
     PageCover,
@@ -51,6 +51,7 @@ export default defineComponent({
     const specificlistStore = useSpecificlistStore()
     const currentTag = ref('')
     const postlist = ref(new PostList().posts)
+    const { pushPage } = useMixin()
     const changeTag = async (item: GridItem) => {
       currentTag.value = item.name
       await specificlistStore.fecthTag(item.slug).then(() => {
@@ -74,7 +75,8 @@ export default defineComponent({
       gridlist: computed(() => specificlistStore.tags),
       changeTag,
       currentTag,
-      postlist
+      postlist,
+      pushPage
     }
   }
 })
