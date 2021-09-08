@@ -1,10 +1,10 @@
 {
   "name": "hexo-theme-mirages",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A theme for Hexo.",
   "author": "Uyloal <liaoyu_0114@icloud.com>",
   "license": "MIT",
-  "repository": "https://github.com/uyloal/hexo-theme-mirages",
+  "repository": "https://github.com/lyra-ui/hexo-theme-mirages",
   "keywords": [
     "hexo",
     "hexo-theme",
